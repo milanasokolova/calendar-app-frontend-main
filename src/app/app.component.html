@@ -1,0 +1,68 @@
+<br>
+
+<div class="mx-5">
+<div class="row">
+  <div class="col-md-4">
+    <div class="btn-group">
+
+      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        Previous
+      </div>
+
+      <div class="btn btn-outline-grey" mwlCalendarToday [(viewDate)]="viewDate">
+        Today
+      </div>
+
+      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        Next
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-4 text-center text-primary fw-bold">
+    <h1>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h1>
+  </div>
+
+  <div class="col-md-4 text-end">
+
+    <div class="btn-group">
+      <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+        Month
+      </div>
+
+      <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+        Week
+      </div>
+
+      <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+        Day
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div [ngSwitch]="view">
+
+  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="extendedEvents">
+  </mwl-calendar-month-view>
+
+  <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="extendedEvents"
+    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-week-view>
+
+  <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="extendedEvents"
+    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-day-view>
+
+</div>
+
+<br /><br /><br />
+
+<app-add-edit-calendar-event [extendedEvents]="extendedEvents"></app-add-edit-calendar-event>
+
+</div>

@@ -1,0 +1,70 @@
+<h1 class="text-primary">
+  Edit events
+  <button class="btn btn-primary float-end d-flex align-items-center" (click)="addEvent()">
+    <mat-icon>add</mat-icon>
+    Add new
+  </button>
+  <div class="clearfix"></div>
+</h1>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Reminder</th>
+        <th>Starts at</th>
+        <th>Ends at</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of extendedEvents">
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="event.title" />
+        </td>
+
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="event.description" />
+        </td>
+
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="event.location" />
+        </td>
+
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="event.reminder" />
+        </td>
+
+        <td>
+          <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.start"
+            (ngModelChange)="refresh.next()" [altInput]="true" [convertModelValue]="true" [enableTime]="true"
+            dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
+        </td>
+
+        <td>
+          <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.end" (ngModelChange)="refresh.next()"
+            [altInput]="true" [convertModelValue]="true" [enableTime]="true" dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i" placeholder="Not set" />
+        </td>
+
+        <td>
+          <button class="btn btn-primary" (click)="saveEvent(event)">
+            Save
+          </button>
+
+          <button class="btn btn-danger text-white mx-2" (click)="deleteEvent(event?.id)">
+            Delete
+          </button>
+        </td>
+    </tr>
+    <tr>
+        <p *ngIf="hasValidationErrors" class="text-danger">All fields are required!*</p>
+    </tr>
+    </tbody>
+    
+  </table>
+</div>

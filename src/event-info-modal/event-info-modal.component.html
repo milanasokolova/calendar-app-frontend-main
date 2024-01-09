@@ -1,0 +1,29 @@
+<h1 mat-dialog-title class="text-primary modal-dialog">Details for the event:
+  <i>{{calendarEventData?.title}}</i></h1>
+
+<mat-dialog-content class="mat-typography d-flex">
+
+  <div class="col-md-6">
+    <h2>Event Title:</h2>
+    <p>{{calendarEventData?.title}}</p>
+
+    <h2>Event Location:</h2>
+    <p>{{calendarEventData?.location}}</p>
+
+    <h2>Description:</h2>
+    <p>{{calendarEventData?.description}}</p>
+  </div>
+
+  <div class="col-md-6">
+    <h2>Start and End:</h2>
+    <p>From: {{calendarEventData?.start | date:'dd/MM/yyyy, HH:mm:ss'}}</p>
+    <p>To: {{calendarEventData?.end | date:'dd/MM/yyyy, HH:mm:ss'}} </p>
+
+    <h2>Reminder:</h2>
+    <p>{{calendarEventData?.reminder}}</p>
+  </div>
+
+</mat-dialog-content>
+<div mat-dialog-actions align="end" class="mx-2">
+  <button mat-button mat-dialog-close>Close</button>
+</div>
